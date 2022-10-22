@@ -35,7 +35,8 @@ public class GameManager : MonoBehaviour
     private void Awake()
     {
         currentLevelIndex = PlayerPrefs.GetInt("CurrentLevelIndex", 1);
-        spawnManager = FindObjectOfType<SpawnManager>();
+        spawnManager = GameObject.FindGameObjectWithTag("Spawn Manager").GetComponent<SpawnManager>();
+       
     }
 
     // Start is called before the first frame update
@@ -57,6 +58,11 @@ public class GameManager : MonoBehaviour
         {
             if ( EventSystem.current.IsPointerOverGameObject()/*EventSystem.current.IsPointerOverGameObject(Input.GetTouch(0).fingerId)*/)
                 return;
+
+            if (PlayerPrefs.GetInt("CurrentLevelIndex") <= 5)
+            {
+                GameObject.FindGameObjectWithTag("PlayerClone").SetActive(false);
+            }
 
             isgameStarted = true;
             gamePlayPanel.SetActive(true);
@@ -110,7 +116,7 @@ public class GameManager : MonoBehaviour
                     SceneManager.LoadScene("Level");
                     spawnManager.InstantiateMoreBalls();
                 }
-               
+
             }
         }
 
@@ -123,17 +129,16 @@ public class GameManager : MonoBehaviour
 
             if (Input.GetButtonDown("Fire1"))
             {
-                if (PlayerPrefs.GetInt("CurrentLevelIndex") <= 5)
-                {
-                    SceneManager.LoadScene("Level");
-                }
+                 if (PlayerPrefs.GetInt("CurrentLevelIndex") <= 5)
+                 {
+                     SceneManager.LoadScene("Level");
+                 }
 
-                else
-                {
-                    SceneManager.LoadScene("Level");
-                    spawnManager.InstantiateMoreBalls();
-                }
-                
+                 else
+                 {
+                     SceneManager.LoadScene("Level");
+                     spawnManager.InstantiateMoreBalls();
+                 }
             }
         }
     }

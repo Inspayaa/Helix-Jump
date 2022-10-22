@@ -11,7 +11,7 @@ public class Rings : MonoBehaviour
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player").transform;
-        playerClone = GameObject.FindGameObjectWithTag("Player").transform;
+        playerClone = GameObject.FindGameObjectWithTag("PlayerClone").transform;
     }
 
     // Update is called once per frame
